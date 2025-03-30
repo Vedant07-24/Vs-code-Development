@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmSathi</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen">
+    <header id="main-header" class="bg-green-600 p-4 flex justify-between items-center fixed w-full top-0 z-50 hidden">
+        <div class="flex items-center">
+            <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/logos%2Flogo.jpg?alt=media&token=61b61062-a2d1-4247-8a11-8ae0076d7893" alt="FarmSathi Logo" class="h-10 w-10 mr-2 rounded-full">
+            <h1 class="text-white text-2xl font-bold">FarmSathi</h1>
+        </div>
+        <nav id="nav-menu" class="hidden md:block">
+            <button onclick="showSection('dashboard')" class="text-white mx-2 hover:text-green-200 transition"><i class="bi bi-house-door"></i> Dashboard</button>
+            <button onclick="showSection('fields')" class="text-white mx-2 hover:text-green-200 transition"><i class="bi bi-grid"></i> Fields</button>
+            <button onclick="showSection('chatbot')" class="text-white mx-2 hover:text-green-200 transition"><i class="bi bi-chat-dots"></i> Chatbot</button>
+            <button onclick="showSection('alerts')" class="text-white mx-2 hover:text-green-200 transition"><i class="bi bi-bell"></i> Alerts</button>
+            <button onclick="showSection('learning')" class="text-white mx-2 hover:text-green-200 transition"><i class="bi bi-book"></i> Learning</button>
+            
+        </nav>
+        <button id="mobile-menu" class="md:hidden text-white">
+            <i class="bi bi-list text-2xl"></i>
+        </button>
+    </header>
+  <div id="mobile-nav" class="fixed w-full bg-green-600 top-16 hidden z-40">
+        <div class="flex flex-col p-4">
+            <button onclick="showSection('dashboard')" class="text-white py-2 hover:bg-green-700 px-3 rounded transition"><i class="bi bi-house-door mr-2"></i> Dashboard</button>
+            <button onclick="showSection('fields')" class="text-white py-2 hover:bg-green-700 px-3 rounded transition"><i class="bi bi-grid mr-2"></i> Fields</button>
+            <button onclick="showSection('chatbot')" class="text-white py-2 hover:bg-green-700 px-3 rounded transition"><i class="bi bi-chat-dots mr-2"></i> Chatbot</button>
+            <button onclick="showSection('alerts')" class="text-white py-2 hover:bg-green-700 px-3 rounded transition"><i class="bi bi-bell mr-2"></i> Alerts</button>
+            <button onclick="showSection('learning')" class="text-white py-2 hover:bg-green-700 px-3 rounded transition"><i class="bi bi-book mr-2"></i> Learning</button>
+           
+        </div>
+    </div>
+
+ 
+    <section id="login" class="pt-0 min-h-screen flex items-center justify-center login-bg">
+        <div class="auth-container p-8 rounded-lg w-full max-w-md">
+            <div class="flex justify-center mb-8">
+                <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/logos%2Flogo.jpg?alt=media&token=61b61062-a2d1-4247-8a11-8ae0076d7893" alt="FarmSathi Logo" class="h-20 w-20 rounded-full border-4 border-green-500">
+            </div>
+            <h2 class="text-3xl font-bold mb-6 text-center text-white">Welcome to FarmSathi</h2>
+            <form id="login-form" class="space-y-5">
+                <div>
+                    <label class="block mb-2 text-gray-300">Email</label>
+                    <input type="email" required class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-green-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block mb-2 text-gray-300">Password</label>
+                    <input type="password" required class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-green-500 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full bg-green-600 text-white p-3 rounded-lg font-semibold hover:bg-green-500 transition btn-hover">Login</button>
+                <p class="text-center text-gray-300">Don't have an account? <button type="button" onclick="showSection('register')" class="text-green-500 font-semibold hover:underline">Register</button></p>
+            </form>
+        </div>
+    </section>
+    <section id="register" class="hide-section pt-0 min-h-screen flex items-center justify-center login-bg">
+        <div class="auth-container p-8 rounded-lg w-full max-w-md">
+            <div class="flex justify-center mb-8">
+                <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/logos%2Flogo.jpg?alt=media&token=61b61062-a2d1-4247-8a11-8ae0076d7893" alt="FarmSathi Logo" class="h-20 w-20 rounded-full border-4 border-green-500">
+            </div>
+            <h2 class="text-3xl font-bold mb-6 text-center text-white">Create Account</h2>
+            <form id="register-form" class="space-y-5">
+                <div>
+                    <label class="block mb-2 text-gray-300">Name</label>
+                    <input type="text" required class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-green-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block mb-2 text-gray-300">Email</label>
+                    <input type="email" required class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-green-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block mb-2 text-gray-300">Mobile Number</label>
+                    <input type="tel" required class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-green-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block mb-2 text-gray-300">State</label>
+                    <select class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-green-500 focus:outline-none">
+                        <option value="">Select State</option>
+                        <option value="AP">Andhra Pradesh</option>
+                        <option value="AR">Arunachal Pradesh</option>
+                        <option value="AS">Assam</option>
+                        <option value="BR">Bihar</option>
+                        <option value="CT">Chhattisgarh</option>
+                        <option value="GA">Goa</option>
+                        <option value="GJ">Gujarat</option>
+                        <option value="HR">Haryana</option>
+                        <option value="HP">Himachal Pradesh</option>
+                        <option value="JH">Jharkhand</option>
+                        <option value="KA">Karnataka</option>
+                        <option value="KL">Kerala</option>
+                        <option value="MP">Madhya Pradesh</option>
+                        <option value="MH">Maharashtra</option>
+                        <option value="MN">Manipur</option>
+                        <option value="ML">Meghalaya</option>
+                        <option value="MZ">Mizoram</option>
+                        <option value="NL">Nagaland</option>
+                        <option value="OR">Odisha</option>
+                        <option value="PB">Punjab</option>
+                        <option value="RJ">Rajasthan</option>
+                        <option value="SK">Sikkim</option>
+                        <option value="TN">Tamil Nadu</option>
+                        <option value="TG">Telangana</option>
+                        <option value="TR">Tripura</option>
+                        <option value="UP">Uttar Pradesh</option>
+                        <option value="UK">Uttarakhand</option>
+                        <option value="WB">West Bengal</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block mb-2 text-gray-300">Password</label>
+                    <input type="password" required class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-green-500 focus:outline-none">
+                </div>
+                <button type="submit" class="w-full bg-green-600 text-white p-3 rounded-lg font-semibold hover:bg-green-500 transition btn-hover">Register</button>
+                <p class="text-center text-gray-300">Already have an account? <button type="button" onclick="showSection('login')" class="text-green-500 font-semibold hover:underline">Login</button></p>
+            </form>
+        </div>
+    </section>
+
+    
+    <section id="dashboard" class="hide-section pt-20 p-4">
+        <div class="flex flex-wrap gap-4 justify-center mb-6">
+            <button onclick="showSection('fields')" class="bg-green-600 p-4 rounded-lg flex items-center space-x-2 btn-hover">
+                <i class="bi bi-plus-circle text-xl"></i>
+                <span>Add Field</span>
+            </button>
+            <button onclick="showSection('alerts')" class="bg-red-600 p-4 rounded-lg flex items-center space-x-2 btn-hover">
+                <i class="bi bi-exclamation-triangle text-xl"></i>
+                <span>Alerts</span>
+            </button>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+            <div class="dashboard-card p-6 rounded-lg flex flex-col items-center justify-center text-center">
+                <i class="bi bi-droplet-fill text-4xl text-blue-500 mb-3"></i>
+                <h3 class="text-xl font-bold">Overall Moisture</h3>
+                <p class="text-4xl font-bold mt-2 text-blue-400">75%</p>
+            </div>
+            <div class="dashboard-card p-6 rounded-lg flex flex-col items-center justify-center text-center">
+                <i class="bi bi-thermometer-half text-4xl text-yellow-500 mb-3"></i>
+                <h3 class="text-xl font-bold">Current Temperature</h3>
+                <p class="text-4xl font-bold mt-2 text-yellow-400">28°C</p>
+            </div>
+            <div class="dashboard-card p-6 rounded-lg flex flex-col items-center justify-center text-center">
+                <i class="bi bi-bell-fill text-4xl text-red-500 mb-3"></i>
+                <h3 class="text-xl font-bold">Active Alerts</h3>
+                <p class="text-4xl font-bold mt-2 text-red-400">1</p>
+            </div>
+            <div class="dashboard-card p-6 rounded-lg flex flex-col items-center justify-center text-center">
+                <i class="bi bi-cloud-rain text-4xl text-gray-400 mb-3"></i>
+                <h3 class="text-xl font-bold">Days Since Rain</h3>
+                <p class="text-4xl font-bold mt-2 text-gray-300">4</p>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+            <div class="dashboard-card p-6 rounded-lg">
+                <h3 class="font-bold text-xl mb-4 text-green-400">Soil Moisture Trends</h3>
+                <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/additional-images%2Fgraph.png?alt=media&token=75dbb447-6ac8-4e47-a811-1c0e09a9591e" alt="Soil Moisture Graph" class="w-full h-auto rounded-lg">
+            </div>
+            <div class="dashboard-card p-6 rounded-lg">
+                <h3 class="font-bold text-xl mb-4 text-blue-400">Water Usage</h3>
+                <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/additional-images%2Fpiechart.jpg?alt=media&token=36cb9205-3720-4c96-b526-17736cc973bf" alt="Water Usage Chart" class="w-full h-auto rounded-lg">
+            </div>
+        </div>
+    </section>
+
+  <section id="fields" class="hide-section pt-20 p-4">
+        <h2 class="text-2xl font-bold mb-6 text-green-400"><i class="bi bi-grid"></i> Your Fields</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="dashboard-card p-4 rounded-lg overflow-hidden">
+                <div class="relative">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/additional-images%2Fcornimage.jpg?alt=media&token=435c391c-a95c-4231-a1e7-75d24fba7717" alt="Corn Field" class="w-full h-56 object-cover rounded-lg mb-4 hover:scale-105 transition-transform duration-300">
+                    <span class="absolute top-3 right-3 bg-green-500 text-white px-2 py-1 rounded text-sm">Active</span>
+                </div>
+                <h3 class="font-bold text-lg text-green-400 mb-1">Corn Field A</h3>
+                <p class="text-gray-300">Last irrigated: July 5, 2024</p>
+                <div class="mt-3 flex items-center">
+                    <div class="w-full bg-gray-600 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 70%"></div>
+                    </div>
+                    <span class="ml-2 text-blue-400">70%</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">Moisture Level</p>
+            </div>
+            <div class="dashboard-card p-4 rounded-lg overflow-hidden">
+                <div class="relative">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/additional-images%2Fwheatimage.jpg?alt=media&token=b38cc530-ada9-41ac-8858-2b3b8e818245" alt="Wheat Field" class="w-full h-56 object-cover rounded-lg mb-4 hover:scale-105 transition-transform duration-300">
+                    <span class="absolute top-3 right-3 bg-yellow-500 text-white px-2 py-1 rounded text-sm">Pending</span>
+                </div>
+                <h3 class="font-bold text-lg text-green-400 mb-1">Wheat Field B</h3>
+                <p class="text-gray-300">Last irrigated: July 1, 2024</p>
+                <div class="mt-3 flex items-center">
+                    <div class="w-full bg-gray-600 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 45%"></div>
+                    </div>
+                    <span class="ml-2 text-blue-400">45%</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">Moisture Level</p>
+            </div>
+            <div class="dashboard-card p-4 rounded-lg overflow-hidden">
+                <div class="relative">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/additional-images%2Fsoyabeanimage.jpg?alt=media&token=ace53bff-f6be-4271-bd73-55a6d2f163e3" alt="Soybean Field" class="w-full h-56 object-cover rounded-lg mb-4 hover:scale-105 transition-transform duration-300">
+                    <span class="absolute top-3 right-3 bg-green-500 text-white px-2 py-1 rounded text-sm">Active</span>
+                </div>
+                <h3 class="font-bold text-lg text-green-400 mb-1">Soybean Field</h3>
+                <p class="text-gray-300">Last irrigated: July 3, 2024</p>
+                <div class="mt-3 flex items-center">
+                    <div class="w-full bg-gray-600 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
+                    </div>
+                    <span class="ml-2 text-blue-400">80%</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">Moisture Level</p>
+            </div>
+            <div class="dashboard-card p-4 rounded-lg overflow-hidden">
+                <div class="relative">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/additional-images%2Fpotatoimage.jpg?alt=media&token=b83f722b-9fc5-4a5e-b428-5c6ce38c30ea" alt="Potato Field" class="w-full h-56 object-cover rounded-lg mb-4 hover:scale-105 transition-transform duration-300">
+                    <span class="absolute top-3 right-3 bg-red-500 text-white px-2 py-1 rounded text-sm">Alert</span>
+                </div>
+                <h3 class="font-bold text-lg text-green-400 mb-1">Potato Field</h3>
+                <p class="text-gray-300">Last irrigated: June 28, 2024</p>
+                <div class="mt-3 flex items-center">
+                    <div class="w-full bg-gray-600 rounded-full h-2.5">
+                        <div class="bg-red-500 h-2.5 rounded-full" style="width: 20%"></div>
+                    </div>
+                    <span class="ml-2 text-red-400">20%</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">Moisture Level</p>
+            </div>
+            <div class="dashboard-card p-4 rounded-lg overflow-hidden">
+                <div class="relative">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/widecanvas-d0dd4.appspot.com/o/additional-images%2Friceimage.jpg?alt=media&token=2b31a0e0-26a1-4e4c-a5f1-97a8f49ac7f7" alt="Rice Field" class="w-full h-56 object-cover rounded-lg mb-4 hover:scale-105 transition-transform duration-300">
+                    <span class="absolute top-3 right-3 bg-green-500 text-white px-2 py-1 rounded text-sm">Active</span>
+                </div>
+                <h3 class="font-bold text-lg text-green-400 mb-1">Rice Field</h3>
+                <p class="text-gray-300">Last irrigated: July 6, 2024</p>
+                <div class="mt-3 flex items-center">
+                    <div class="w-full bg-gray-600 rounded-full h-2.5">
+                        <div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+                    </div>
+                    <span class="ml-2 text-blue-400">90%</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">Moisture Level</p>
+            </div>
+        </div>
+    </section>
+    <section id="chatbot" class="hide-section pt-20 p-4">
+        <div class="max-w-3xl mx-auto dashboard-card rounded-lg p-0 overflow-hidden">
+            <div class="flex items-center p-4 bg-gradient-to-r from-green-600 to-green-800">
+                <i class="bi bi-robot text-3xl mr-3 text-white"></i>
+                <div>
+                    <h2 class="text-xl font-bold text-white">Agricultural Assistant</h2>
+                    <p class="text-sm text-green-200">Your expert farming companion</p>
+                </div>
+            </div>
+            <div id="chat-messages" class="h-96 overflow-y-auto p-4 bg-gray-900 rounded space-y-4">
+                <div class="mb-4 text-left">
+                    <div class="bg-gray-700 inline-block rounded-lg px-4 py-3 max-w-xs">
+                        Hello! I'm your agricultural assistant. How can I help you with your farming needs today?
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-2 p-3 bg-gray-800 border-t border-gray-700">
+                <input type="text" id="chat-input" placeholder="Ask about farming, soil health, irrigation..." class="flex-1 p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-green-500">
+                <button onclick="sendMessage()" class="bg-green-600 hover:bg-green-500 px-5 py-2 rounded-lg text-white font-semibold flex items-center">
+                    <i class="bi bi-send mr-2"></i> Send
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="alerts" class="hide-section pt-20 p-4">
+        <h2 class="text-2xl font-bold mb-6 text-red-400"><i class="bi bi-bell"></i> Active Alerts</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="dashboard-card p-5 rounded-lg border-l-4 border-red-500">
+                <div class="flex items-start">
+                    <div class="bg-red-500 rounded-full p-2 mr-3">
+                        <i class="bi bi-droplet-fill text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-red-400">Low Soil Moisture</h3>
+                        <p class="text-gray-300">Field A requires immediate irrigation</p>
+                        <p class="text-xs text-gray-400 mt-2">Detected: 2 hours ago</p>
+                        <button class="mt-3 bg-red-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-500 transition">Take Action</button>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card p-5 rounded-lg border-l-4 border-yellow-500">
+                <div class="flex items-start">
+                    <div class="bg-yellow-500 rounded-full p-2 mr-3">
+                        <i class="bi bi-tools text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-yellow-400">Equipment Failure</h3>
+                        <p class="text-gray-300">Irrigation pump needs maintenance</p>
+                        <p class="text-xs text-gray-400 mt-2">Detected: Yesterday</p>
+                        <button class="mt-3 bg-yellow-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-yellow-500 transition">Schedule</button>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card p-5 rounded-lg border-l-4 border-blue-500">
+                <div class="flex items-start">
+                    <div class="bg-blue-500 rounded-full p-2 mr-3">
+                        <i class="bi bi-cloud-lightning-rain text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-2 text-blue-400">Extreme Weather Alert</h3>
+                        <p class="text-gray-300">Heavy rainfall expected in next 24 hours</p>
+                        <p class="text-xs text-gray-400 mt-2">Forecast updated: 3 hours ago</p>
+                        <button class="mt-3 bg-blue-600 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-500 transition">Prepare</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="learning" class="hide-section pt-20 p-4">
+        <h2 class="text-2xl font-bold mb-6 text-green-400"><i class="bi bi-book"></i> App Learning Center</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="dashboard-card p-0 rounded-lg overflow-hidden cursor-pointer group">
+                <div class="relative">
+                    <div class="bg-gray-700 h-48 rounded-t">
+                        <i class="bi bi-translate absolute right-3 top-3 text-2xl text-green-500"></i>
+                    </div>
+                    <i class="bi bi-play-circle absolute inset-0 m-auto text-5xl text-white opacity-70 group-hover:opacity-100 group-hover:text-green-400 transition-all duration-300"></i>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg text-white group-hover:text-green-400 transition">App Tutorial - Hindi</h3>
+                    <p class="text-gray-400 text-sm mt-1">Learn how to use FarmSathi in Hindi</p>
+                    <div class="flex items-center mt-3 text-xs text-gray-500">
+                        <i class="bi bi-clock mr-1"></i>
+                        <span>8:45 minutes</span>
+                        <span class="ml-auto">10.2K views</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card p-0 rounded-lg overflow-hidden cursor-pointer group">
+                <div class="relative">
+                    <div class="bg-gray-700 h-48 rounded-t">
+                        <i class="bi bi-translate absolute right-3 top-3 text-2xl text-green-500"></i>
+                    </div>
+                    <i class="bi bi-play-circle absolute inset-0 m-auto text-5xl text-white opacity-70 group-hover:opacity-100 group-hover:text-green-400 transition-all duration-300"></i>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg text-white group-hover:text-green-400 transition">App Tutorial - English</h3>
+                    <p class="text-gray-400 text-sm mt-1">Learn how to use FarmSathi in English</p>
+                    <div class="flex items-center mt-3 text-xs text-gray-500">
+                        <i class="bi bi-clock mr-1"></i>
+                        <span>7:30 minutes</span>
+                        <span class="ml-auto">15.5K views</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card p-0 rounded-lg overflow-hidden cursor-pointer group">
+                <div class="relative">
+                    <div class="bg-gray-700 h-48 rounded-t">
+                        <i class="bi bi-translate absolute right-3 top-3 text-2xl text-green-500"></i>
+                    </div>
+                    <i class="bi bi-play-circle absolute inset-0 m-auto text-5xl text-white opacity-70 group-hover:opacity-100 group-hover:text-green-400 transition-all duration-300"></i>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg text-white group-hover:text-green-400 transition">App Tutorial - Tamil</h3>
+                    <p class="text-gray-400 text-sm mt-1">Learn how to use FarmSathi in Tamil</p>
+                    <div class="flex items-center mt-3 text-xs text-gray-500">
+                        <i class="bi bi-clock mr-1"></i>
+                        <span>9:15 minutes</span>
+                        <span class="ml-auto">8.7K views</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button class="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition flex items-center mx-auto">
+                <i class="bi bi-collection-play mr-2"></i> View More Tutorials
+            </button>
+        </div>
+        <script src="script.js"></script>
+    </section>
+
